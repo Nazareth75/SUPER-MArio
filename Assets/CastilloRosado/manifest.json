@@ -1,0 +1,278 @@
+[
+  {
+    "file": "Peach/Peach_Idle_01.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Idle_02.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Walk_01.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Walk_02.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Run_01.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Run_02.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Jump_01.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Jump_02.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Attack_01.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Attack_02.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_Damage.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Peach/Peach_HeartAttack.png",
+    "type": "Peach"
+  },
+  {
+    "file": "Bowser/Bowser_Idle_01.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Bowser/Bowser_Idle_02.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Bowser/Bowser_Walk.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Bowser/Bowser_Attack.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Bowser/Bowser_Rage.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Bowser/Bowser_Damage.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Bowser/Bowser_Down.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Bowser/Bowser_Death.png",
+    "type": "Bowser"
+  },
+  {
+    "file": "Enemies/GoombaPink_01.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/GoombaPink_02.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/KoopaPink_01.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/KoopaWinged.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/KamekPink.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/BooPink.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/SpinyPink.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/Thwomp_01.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Enemies/Thwomp_02.png",
+    "type": "Enemies"
+  },
+  {
+    "file": "Tiles/BrickPink.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/BrickPinkTop.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/QuestionBlock.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/HeartBlock.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/Floor_01.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/Floor_02.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/Slope_01.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/Slope_02.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/Arch_01.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/Arch_02.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Tiles/LongFloor.png",
+    "type": "Tiles"
+  },
+  {
+    "file": "Platforms/MovingPlatform_01.png",
+    "type": "Platforms"
+  },
+  {
+    "file": "Platforms/MovingPlatform_02.png",
+    "type": "Platforms"
+  },
+  {
+    "file": "Platforms/Spikes.png",
+    "type": "Platforms"
+  },
+  {
+    "file": "Platforms/Chain.png",
+    "type": "Platforms"
+  },
+  {
+    "file": "Doors/BossDoor.png",
+    "type": "Doors"
+  },
+  {
+    "file": "Doors/SmallDoor.png",
+    "type": "Doors"
+  },
+  {
+    "file": "Doors/CastleGate.png",
+    "type": "Doors"
+  },
+  {
+    "file": "Hazards/Lava_01.png",
+    "type": "Hazards"
+  },
+  {
+    "file": "Hazards/Lava_02.png",
+    "type": "Hazards"
+  },
+  {
+    "file": "Hazards/Lava_03.png",
+    "type": "Hazards"
+  },
+  {
+    "file": "Hazards/PinkFlame.png",
+    "type": "Hazards"
+  },
+  {
+    "file": "Hazards/Fireball.png",
+    "type": "Hazards"
+  },
+  {
+    "file": "Hazards/FireballSmall.png",
+    "type": "Hazards"
+  },
+  {
+    "file": "Decor/Banner.png",
+    "type": "Decor"
+  },
+  {
+    "file": "Decor/Flag.png",
+    "type": "Decor"
+  },
+  {
+    "file": "Decor/Torch.png",
+    "type": "Decor"
+  },
+  {
+    "file": "Decor/Chandelier.png",
+    "type": "Decor"
+  },
+  {
+    "file": "Decor/Window.png",
+    "type": "Decor"
+  },
+  {
+    "file": "Decor/Flowers.png",
+    "type": "Decor"
+  },
+  {
+    "file": "Decor/Throne.png",
+    "type": "Decor"
+  },
+  {
+    "file": "UI/Hearts.png",
+    "type": "UI"
+  },
+  {
+    "file": "UI/Coins.png",
+    "type": "UI"
+  },
+  {
+    "file": "UI/Pause.png",
+    "type": "UI"
+  },
+  {
+    "file": "UI/Settings.png",
+    "type": "UI"
+  },
+  {
+    "file": "UI/BossBar.png",
+    "type": "UI"
+  },
+  {
+    "file": "Effects/Smoke.png",
+    "type": "Effects"
+  },
+  {
+    "file": "Effects/Sparkle.png",
+    "type": "Effects"
+  },
+  {
+    "file": "Effects/HeartsFX.png",
+    "type": "Effects"
+  },
+  {
+    "file": "Effects/PinkExplosion.png",
+    "type": "Effects"
+  }
+]
