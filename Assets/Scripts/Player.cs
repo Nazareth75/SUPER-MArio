@@ -35,6 +35,8 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        if (dead) return;
+        if (AdventureAudio.Instance) { AdventureAudio.Instance.StopMusic(); AdventureAudio.Instance.Play(AdventureAudio.Instance.hurt); }
         smallRenderer.enabled = false;
         bigRenderer.enabled = false;
         deathAnimation.enabled = true;

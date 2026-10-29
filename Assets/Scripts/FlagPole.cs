@@ -21,6 +21,7 @@ public class FlagPole : MonoBehaviour
 
     private IEnumerator LevelCompleteSequence(Transform player)
     {
+        if (AdventureAudio.Instance) { AdventureAudio.Instance.StopMusic(); AdventureAudio.Instance.Play(AdventureAudio.Instance.finish); }
         player.GetComponent<PlayerMovement>().enabled = false;
 
         yield return MoveTo(player, poleBottom.position);

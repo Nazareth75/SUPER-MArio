@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        NewGame();
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "1-1") NewGame();
+        else { lives = 3; coins = 0; stage = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "1-3" ? 3 : 2; world = 1; }
     }
 
     public void NewGame()
@@ -44,9 +45,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        // TODO: show game over screen
-
-        NewGame();
+        CancelInvoke();
+        SceneManager.LoadScene("GameOver");
     }
 
     public void LoadLevel(int world, int stage)
@@ -96,3 +96,4 @@ public class GameManager : MonoBehaviour
     }
 
 }
+

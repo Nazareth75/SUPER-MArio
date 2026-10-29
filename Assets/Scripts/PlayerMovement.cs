@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 8f;
     public float maxJumpHeight = 5f;
     public float maxJumpTime = 1f;
+    public bool swimming;
+    private float nextStroke;
     public float jumpForce => (2f * maxJumpHeight) / (maxJumpTime / 2f);
     public float gravity => (-2f * maxJumpHeight) / Mathf.Pow(maxJumpTime / 2f, 2f);
 
@@ -48,6 +50,22 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         HorizontalMovement();
+
+        if (swimming)
+        {
+            grounded = rigidbody.Raycast(Vector2.down);
+            velocity.y = Mathf.Max(velocity.y - 9f * Time.deltaTime, -2.5f);
+            if (Input.GetButton("Jump") && Time.time >= nextStroke)
+            {
+                velocity.y = 4.8f;
+                nextStroke = Time.time + 0.25f;
+                if (AdventureAudio.Instance) AdventureAudio.Instance.Play(AdventureAudio.Instance.jump);
+            }
+            if (rigidbody.Raycast(Vector2.up) && velocity.y > 0) velocity.y = 0;
+            if (grounded && velocity.y < 0) velocity.y = 0;
+            jumping = !grounded;
+            return;
+        }
 
         grounded = rigidbody.Raycast(Vector2.down);
 
@@ -101,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             velocity.y = jumpForce;
+            if (AdventureAudio.Instance) AdventureAudio.Instance.Play(AdventureAudio.Instance.jump);
             jumping = true;
         }
     }

@@ -21,6 +21,7 @@ public class PowerUp : MonoBehaviour
 
     private void Collect(GameObject player)
     {
+        if (AdventureAudio.Instance) AdventureAudio.Instance.Play(type == Type.Coin ? AdventureAudio.Instance.coin : type == Type.ExtraLife ? AdventureAudio.Instance.life : AdventureAudio.Instance.powerup);
         switch (type)
         {
             case Type.Coin:

@@ -7,8 +7,8 @@ public class DeathBarrier : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.gameObject.SetActive(false);
-            GameManager.Instance.ResetLevel(3f);
+            var player = other.GetComponent<Player>();
+            if (player && !player.dead) player.Death();
         }
         else
         {

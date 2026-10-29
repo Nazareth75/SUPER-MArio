@@ -9,6 +9,9 @@ public class SideScrolling : MonoBehaviour
     public float height = 6.5f;
     public float undergroundHeight = -9.5f;
     public float undergroundThreshold = 0f;
+    public bool bounded;
+    public float leftBound = 9, rightBound = 150;
+    private float followVelocity;
 
     private void Awake()
     {
@@ -20,7 +23,10 @@ public class SideScrolling : MonoBehaviour
     {
         // track the player moving to the right
         Vector3 cameraPosition = transform.position;
-        cameraPosition.x = Mathf.Max(cameraPosition.x, player.position.x);
+        if (!player) return;
+        cameraPosition.x = bounded
+            ? Mathf.SmoothDamp(cameraPosition.x, Mathf.Clamp(player.position.x + 2, leftBound, rightBound), ref followVelocity, 0.18f)
+            : Mathf.Max(cameraPosition.x, player.position.x);
         transform.position = cameraPosition;
     }
 

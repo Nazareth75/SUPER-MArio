@@ -29,6 +29,7 @@ public class Goomba : MonoBehaviour
 
     private void Flatten()
     {
+        if (AdventureAudio.Instance) AdventureAudio.Instance.Play(AdventureAudio.Instance.stomp);
         GetComponent<Collider2D>().enabled = false;
         GetComponent<EntityMovement>().enabled = false;
         GetComponent<AnimatedSprite>().enabled = false;

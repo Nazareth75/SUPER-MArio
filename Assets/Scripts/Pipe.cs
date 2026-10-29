@@ -20,6 +20,8 @@ public class Pipe : MonoBehaviour
 
     private IEnumerator Enter(Transform player)
     {
+        if (!player.GetComponent<PlayerMovement>().enabled) yield break;
+        if (AdventureAudio.Instance) AdventureAudio.Instance.Play(AdventureAudio.Instance.pipe);
         player.GetComponent<PlayerMovement>().enabled = false;
 
         Vector3 enteredPosition = transform.position + enterDirection;

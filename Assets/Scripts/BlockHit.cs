@@ -20,6 +20,7 @@ public class BlockHit : MonoBehaviour
 
     private void Hit()
     {
+        if (AdventureAudio.Instance) AdventureAudio.Instance.Play(item != null ? AdventureAudio.Instance.coin : AdventureAudio.Instance.brick);
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = true; // show if hidden
 
