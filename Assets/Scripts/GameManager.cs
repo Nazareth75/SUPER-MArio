@@ -31,16 +31,32 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
 
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "1-1") NewGame();
-        else { lives = 3; coins = 0; stage = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "1-3" ? 3 : 2; world = 1; }
+        lives = 3;
+        coins = 0;
+        world = 1;
+        string scene = SceneManager.GetActiveScene().name;
+        stage = scene.StartsWith("1-") && int.TryParse(scene.Substring(2), out int number) ? number : 0;
     }
 
     public void NewGame()
     {
+        StartLevel(1);
+    }
+
+    public void StartLevel(int number)
+    {
+        CancelInvoke();
+        Time.timeScale = 1;
         lives = 3;
         coins = 0;
+        LoadLevel(1, Mathf.Clamp(number, 1, 4));
+    }
 
-        LoadLevel(1, 1);
+    public void ShowMenu()
+    {
+        CancelInvoke();
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Menu");
     }
 
     public void GameOver()

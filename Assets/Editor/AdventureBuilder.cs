@@ -33,12 +33,13 @@ public static class AdventureBuilder
         if (!UnityEngine.Object.FindFirstObjectByType<AdventureHud>()) new GameObject("Marcador").AddComponent<AdventureHud>().title = "MUNDO 1-1";
         AddAudio("Superficie");
         EditorSceneManager.SaveScene(first);
-        string[] names = { "1-1", "1-2", "1-3", "GameOver", "Completed" };
+        CastleBuilder.Build();
+        string[] names = { "Menu", "1-1", "1-2", "1-3", "1-4", "GameOver", "Completed" };
         EditorBuildSettings.scenes = Array.ConvertAll(names, n => new EditorBuildSettingsScene("Assets/Scenes/" + n + ".unity", true));
         AssetDatabase.SaveAssets();
         Debug.Log("ADVENTURE_BUILD_OK: 5 escenas guardadas y conectadas");
     }
-    static void Begin(string name, Color color, bool water, int end)
+    internal static void Begin(string name, Color color, bool water, int end)
     {
         EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
         mode = name;
@@ -110,7 +111,7 @@ public static class AdventureBuilder
         }
         for (int x = 6; x < 162; x += 5) Decor("Bubble", x, 2, new Color(1,1,1,.45f), .4f).AddComponent<WaterBubbles>();
         Blocks("HardBlock", 156, 0, 8, 3);
-        Exit(164, true);
+        Exit(164, false);
         Save();
     }
     static void MakeEnding(string name, bool lost)
@@ -125,7 +126,7 @@ public static class AdventureBuilder
         AddAudio(lost ? "Final" : "Salida");
         EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), "Assets/Scenes/" + name + ".unity");
     }
-    static GameObject Spawn(string prefab, float x, float y)
+    internal static GameObject Spawn(string prefab, float x, float y)
     {
         var asset = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/" + prefab + ".prefab");
         if (!asset) throw new Exception("Falta prefab: " + prefab);
@@ -168,7 +169,7 @@ public static class AdventureBuilder
         render.color = color; return obj;
     }
     static void Save() { EditorSceneManager.SaveScene(SceneManager.GetActiveScene(), "Assets/Scenes/" + mode + ".unity"); }
-    static void AddAudio(string theme)
+    internal static void AddAudio(string theme)
     {
         var audio = UnityEngine.Object.FindFirstObjectByType<AdventureAudio>();
         if (!audio) audio = new GameObject("Sonidos y música").AddComponent<AdventureAudio>();

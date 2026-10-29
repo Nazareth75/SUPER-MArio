@@ -20,16 +20,17 @@ public class AdventureHud : MonoBehaviour
             text.fontSize = 40;
             GUI.Label(new Rect(220, 135, 520, 65), gameOver ? "GAME OVER" : "¡NIVELES COMPLETADOS!", text);
             text.fontSize = 19;
-            GUI.Label(new Rect(230, 212, 500, 65), gameOver ? "Mario se quedó sin vidas.\nTu próxima aventura empieza aquí." : "Superaste el subsuelo y el mundo acuático.\n¡Gracias por jugar!", text);
+            GUI.Label(new Rect(230, 212, 500, 65), gameOver ? "Mario se quedó sin vidas.\nTu próxima aventura empieza aquí." : "¡Rescataste a Peach del castillo rosado!\n¡Gracias por jugar!", text);
             var button = new GUIStyle(GUI.skin.button) { fontSize = 21 };
             if (GUI.Button(new Rect(330, 308, 300, 52), "Volver a jugar", button)) GameManager.Instance.NewGame();
-            if (GUI.Button(new Rect(330, 373, 300, 40), "Salir", button)) Application.Quit();
+            if (GUI.Button(new Rect(330, 373, 300, 40), "Elegir nivel", button)) GameManager.Instance.ShowMenu();
         }
         else
         {
             GUI.Box(new Rect(16, 12, 928, 45), "");
             var manager = GameManager.Instance;
-            GUI.Label(new Rect(25, 17, 910, 35), title + (manager ? $"     VIDAS  {manager.lives}     MONEDAS  {manager.coins:00}" : ""), text);
+            GUI.Label(new Rect(25, 17, 800, 35), title + (manager ? $"     VIDAS  {manager.lives}     MONEDAS  {manager.coins:00}" : ""), text);
+            if (GUI.Button(new Rect(840, 20, 90, 28), "Menú") && manager) manager.ShowMenu();
             text.fontSize = 15;
             GUI.Label(new Rect(70, 506, 820, 26), SceneManager.GetActiveScene().name == "1-3" ? "A / D o flechas: nadar   ·   Espacio: impulso   ·   Llega a la tubería de salida" : "A / D o flechas: moverse   ·   Espacio: saltar   ·   Llega a la tubería de salida", text);
         }
