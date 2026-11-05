@@ -9,10 +9,12 @@ public class LevelMenu : MonoBehaviour
     public static bool PlayAsPeach { get; private set; }
     private int page, focused;
     private bool starting;
+    private AudioVolumeMenu volumeMenu;
 
     private void Update()
     {
-        if (starting) return;
+        if (!volumeMenu) volumeMenu = FindFirstObjectByType<AudioVolumeMenu>();
+        if (starting || (volumeMenu && volumeMenu.IsOpen)) return;
         string[] options = Options();
         int direction = Input.GetKeyDown(KeyCode.DownArrow) ? 1 : Input.GetKeyDown(KeyCode.UpArrow) ? -1 : 0;
         if (direction != 0)
@@ -38,7 +40,8 @@ public class LevelMenu : MonoBehaviour
 
     private void Activate(int index)
     {
-        if (starting) return;
+        if (!volumeMenu) volumeMenu = FindFirstObjectByType<AudioVolumeMenu>();
+        if (starting || (volumeMenu && volumeMenu.IsOpen)) return;
         var audio = AdventureAudio.Instance;
         if (page == 2 && index < levels.Length)
         {

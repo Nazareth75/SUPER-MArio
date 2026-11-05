@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class Goomba : MonoBehaviour
 {
+    private bool defeated;
     public Sprite flatSprite;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!defeated && collision.gameObject.CompareTag("Player"))
         {
             Player player = collision.gameObject.GetComponent<Player>();
 
             if (player.starpower) {
                 Hit();
-            } else if (collision.transform.DotTest(transform, Vector2.down)) {
+            } else if (CombatContacts.IsStomp(player, GetComponent<Collider2D>(), collision)) {
                 Flatten();
             } else {
                 player.Hit();
@@ -29,10 +30,12 @@ public class Goomba : MonoBehaviour
 
     private void Flatten()
     {
+        if (defeated) return;
+        defeated = true;
         if (AdventureAudio.Instance) AdventureAudio.Instance.Play(AdventureAudio.Instance.stomp);
         ScoreManager.AddEnemyPoints(this);
         GetComponent<Collider2D>().enabled = false;
-        GetComponent<EntityMovement>().enabled = false;
+        GetComponent<EntityMovement>().StopMoving();
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<SpriteRenderer>().sprite = flatSprite;
         Destroy(gameObject, 0.5f);
@@ -40,6 +43,8 @@ public class Goomba : MonoBehaviour
 
     private void Hit()
     {
+        if (defeated) return;
+        defeated = true;
         ScoreManager.AddEnemyPoints(this);
         GetComponent<AnimatedSprite>().enabled = false;
         GetComponent<DeathAnimation>().enabled = true;

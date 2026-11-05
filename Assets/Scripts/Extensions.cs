@@ -2,6 +2,7 @@ using UnityEngine;
 
 public static class Extensions
 {
+    private static readonly RaycastHit2D[] castHits = new RaycastHit2D[8];
     private static LayerMask layerMask = LayerMask.GetMask("Default");
 
     // Checks if the rigidbody is colliding with an object in a given direction.
@@ -14,13 +15,13 @@ public static class Extensions
             return false;
         }
 
-        float radius = 0.25f;
-        float distance = 0.375f;
-
-        RaycastHit2D hit = Physics2D.CircleCast(rigidbody.position, radius, direction.normalized, distance, layerMask);
-        return hit.collider != null && hit.rigidbody != rigidbody;
+        if (direction.sqrMagnitude < 0.0001f) return false;
+        var filter = new ContactFilter2D();
+        filter.SetLayerMask(layerMask);
+        filter.useTriggers = false;
+        // El barrido parte de la hitbox real: sirve para Mario pequeno/grande y caparazones.
+        return rigidbody.Cast(direction.normalized, filter, castHits, 0.06f) > 0;
     }
-
     // Checks if the transform is facing another transform in a given direction.
     // For example, if you want to check if the player stomps on an enemy, you
     // would pass the player transform, the enemy transform, and Vector2.down.

@@ -10,6 +10,8 @@ public class GameHud : MonoBehaviour
     Text coinValue;
     Text livesValue;
     Text worldValue;
+    Text timeValue;
+    LevelTimer timer;
     int shownScore = -1;
     float pulse;
 
@@ -32,6 +34,8 @@ public class GameHud : MonoBehaviour
     void Refresh()
     {
         GameManager game = GameManager.Instance;
+        if (!timer) timer = FindFirstObjectByType<LevelTimer>();
+        if (timeValue) timeValue.text = timer ? Mathf.CeilToInt(timer.TiempoRestante).ToString("000") : "---";
         int currentScore = ScoreManager.Instance != null ? ScoreManager.Instance.score : 0;
 
         if (scoreValue != null) {
@@ -109,6 +113,9 @@ public class GameHud : MonoBehaviour
 
         CreateLabel(bar, "VIDAS", font, 14, gold, new Vector2(0.58f, 1f), new Vector2(0.58f, 1f), new Vector2(0f, -6f), new Vector2(120f, 16f));
         livesValue = CreateLabel(bar, "x3", font, 24, Color.white, new Vector2(0.58f, 1f), new Vector2(0.58f, 1f), new Vector2(0f, -30f), new Vector2(120f, 28f));
+
+        CreateLabel(bar, "TIEMPO", font, 14, gold, new Vector2(0.73f, 1f), new Vector2(0.73f, 1f), new Vector2(0f, -6f), new Vector2(95f, 16f));
+        timeValue = CreateLabel(bar, "400", font, 24, Color.white, new Vector2(0.73f, 1f), new Vector2(0.73f, 1f), new Vector2(0f, -30f), new Vector2(95f, 28f));
 
         CreateLabel(bar, "MUNDO", font, 14, gold, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-150f, -6f), new Vector2(120f, 16f));
         worldValue = CreateLabel(bar, "1-1", font, 24, Color.white, new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-150f, -30f), new Vector2(120f, 28f));
