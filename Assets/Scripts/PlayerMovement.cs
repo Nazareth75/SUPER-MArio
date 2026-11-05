@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
         bool falling = velocity.y < 0f || !Input.GetButton("Jump");
         float multiplier = falling ? 2f : 1f;
 
+        if (velocity.y > 0f && rigidbody.Raycast(Vector2.up)) velocity.y = 0f;
         // apply gravity and terminal velocity
         velocity.y += gravity * multiplier * Time.deltaTime;
         velocity.y = Mathf.Max(velocity.y, gravity / 2f);
@@ -140,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             // bounce off enemy head
-            if (transform.DotTest(collision.transform, Vector2.down))
+            if (CombatContacts.IsStomp(GetComponent<Player>(), collision.collider, collision))
             {
                 velocity.y = jumpForce / 2f;
                 jumping = true;

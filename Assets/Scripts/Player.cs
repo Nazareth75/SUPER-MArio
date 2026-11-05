@@ -10,7 +10,11 @@ public class Player : MonoBehaviour
     public CapsuleCollider2D capsuleCollider { get; private set; }
     public DeathAnimation deathAnimation { get; private set; }
 
-    public bool big => bigRenderer.enabled;
+    private bool isBig;
+    private float invulnerableUntil;
+    private Coroutine scaleRoutine, starRoutine;
+    public bool big => isBig;
+    public bool invulnerable => starpower || Time.time < invulnerableUntil;
     public bool dead => deathAnimation.enabled;
     public bool starpower { get; private set; }
 
@@ -18,14 +22,16 @@ public class Player : MonoBehaviour
     {
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         deathAnimation = GetComponent<DeathAnimation>();
+        isBig = bigRenderer.enabled;
         activeRenderer = smallRenderer;
     }
 
     public void Hit()
     {
-        if (!dead && !starpower)
+        if (!dead && !invulnerable)
         {
             if (big) {
+                invulnerableUntil = Time.time + 1.5f;
                 if (AudioManager.Instance) AudioManager.Instance.PlayDamage();
                 Shrink();
             } else {
@@ -37,16 +43,19 @@ public class Player : MonoBehaviour
     public void Death()
     {
         if (dead) return;
+        StopAllCoroutines();
         if (AudioManager.Instance) AudioManager.Instance.PlayDeath();
         smallRenderer.enabled = false;
         bigRenderer.enabled = false;
         deathAnimation.enabled = true;
 
-        GameManager.Instance.ResetLevel(3f);
+        if (GameManager.Instance) GameManager.Instance.ResetLevel(3f);
     }
 
     public void Grow()
     {
+        if (dead) return;
+        isBig = true;
         smallRenderer.enabled = false;
         bigRenderer.enabled = true;
         activeRenderer = bigRenderer;
@@ -54,11 +63,14 @@ public class Player : MonoBehaviour
         capsuleCollider.size = new Vector2(1f, 2f);
         capsuleCollider.offset = new Vector2(0f, 0.5f);
 
-        StartCoroutine(ScaleAnimation());
+        if (scaleRoutine != null) StopCoroutine(scaleRoutine);
+        scaleRoutine = StartCoroutine(ScaleAnimation());
     }
 
     public void Shrink()
     {
+        if (dead) return;
+        isBig = false;
         smallRenderer.enabled = true;
         bigRenderer.enabled = false;
         activeRenderer = smallRenderer;
@@ -66,7 +78,8 @@ public class Player : MonoBehaviour
         capsuleCollider.size = new Vector2(1f, 1f);
         capsuleCollider.offset = new Vector2(0f, 0f);
 
-        StartCoroutine(ScaleAnimation());
+        if (scaleRoutine != null) StopCoroutine(scaleRoutine);
+        scaleRoutine = StartCoroutine(ScaleAnimation());
     }
 
     private IEnumerator ScaleAnimation()
@@ -94,7 +107,9 @@ public class Player : MonoBehaviour
 
     public void Starpower()
     {
-        StartCoroutine(StarpowerAnimation());
+        if (dead) return;
+        if (starRoutine != null) StopCoroutine(starRoutine);
+        starRoutine = StartCoroutine(StarpowerAnimation());
     }
 
     private IEnumerator StarpowerAnimation()
