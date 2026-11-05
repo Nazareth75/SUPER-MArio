@@ -1,20 +1,30 @@
 using UnityEngine;
 
+// Compute the lift's displacement before the player submits its physics move.
+[DefaultExecutionOrder(-100)]
+[RequireComponent(typeof(Collider2D))]
 public class AdventurePlatform : MonoBehaviour
 {
     public float travel = 3;
-    private Vector3 origin, previous;
-    private Transform rider;
-    void Start() { origin = previous = transform.position; }
-    void FixedUpdate()
+    private Rigidbody2D body;
+    private Vector2 origin;
+    private float startedAt;
+    public Vector2 Displacement { get; private set; }
+
+    private void Awake()
     {
-        Vector3 position = origin + Vector3.up * Mathf.Sin(Time.fixedTime * .8f) * travel;
-        if (rider) rider.position += position - previous;
-        transform.position = previous = position;
+        body = GetComponent<Rigidbody2D>();
+        if (!body) body = gameObject.AddComponent<Rigidbody2D>();
+        body.bodyType = RigidbodyType2D.Kinematic;
+        origin = body.position;
+        startedAt = Time.fixedTime;
     }
-    void OnCollisionStay2D(Collision2D collision)
+
+    private void FixedUpdate()
     {
-        if (collision.gameObject.CompareTag("Player") && collision.transform.position.y > transform.position.y + .3f) rider = collision.transform;
+        float phase = (Time.fixedTime - startedAt) * .8f;
+        Vector2 target = origin + Vector2.up * (Mathf.Sin(phase) * travel);
+        Displacement = target - body.position;
+        body.MovePosition(target);
     }
-    void OnCollisionExit2D(Collision2D collision) { if (collision.transform == rider) rider = null; }
 }
