@@ -78,7 +78,7 @@ public static class AdventureBuilder
         for (int x = 31; x < 57; x += 4) { Blocks("UndergroundBlock", x, 0, 2, 2 + (x / 4 % 3)); Coins(x, 6, 2); }
         Blocks("UndergroundBrick", 61, 4, 9, 1); Coins(61, 6, 9);
         for (int x = 83; x < 106; x += 7) { Blocks("UndergroundBrick", x, 3 + x % 3, 4, 1); Coins(x, 7, 3); }
-        Platform(75, 2, 4, 2.5f); Platform(117, 3, 5, 3);
+        Platform(76, 2, 4, 2.2f); Platform(117.5f, 3, 5, 3);
         Blocks("UndergroundBrick", 125, 4, 12, 1); Coins(125, 6, 12);
         for (int i = 0; i < 7; i++) Blocks("UndergroundBlock", 143 + i, 0, 1, i + 1);
         foreach (int x in new[] { 19, 28, 60, 69, 89, 101, 129, 138 }) Spawn("Goomba", x, 1);

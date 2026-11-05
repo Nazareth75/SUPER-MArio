@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 velocity;
     private float inputAxis;
+    private AdventurePlatform lift;
 
     public float moveSpeed = 8f;
     public float maxJumpHeight = 5f;
@@ -67,7 +68,9 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        grounded = rigidbody.Raycast(Vector2.down);
+        RaycastHit2D support = Physics2D.CircleCast(rigidbody.position, .25f, Vector2.down, .375f, LayerMask.GetMask("Default"));
+        grounded = support.collider && support.rigidbody != rigidbody;
+        lift = grounded ? support.collider.GetComponent<AdventurePlatform>() : null;
 
         if (grounded) {
             GroundedMovement();
@@ -80,7 +83,13 @@ public class PlayerMovement : MonoBehaviour
     {
         // move mario based on his velocity
         Vector2 position = rigidbody.position;
-        position += velocity * Time.fixedDeltaTime;
+        Vector2 step = velocity * Time.fixedDeltaTime;
+        if (!swimming && lift && grounded && !jumping && velocity.y <= 0f)
+        {
+            step.y = 0f;
+            step += lift.Displacement;
+        }
+        position += step;
 
         // clamp within the screen bounds
         Vector2 leftEdge = camera.ScreenToWorldPoint(Vector2.zero);

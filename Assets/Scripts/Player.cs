@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     public PlayerSpriteRenderer smallRenderer;
     public PlayerSpriteRenderer bigRenderer;
     private PlayerSpriteRenderer activeRenderer;
+    [SerializeField] private Sprite peachIdle, peachJump, peachDamage;
+    [SerializeField] private Sprite[] peachRun;
 
     public CapsuleCollider2D capsuleCollider { get; private set; }
     public DeathAnimation deathAnimation { get; private set; }
@@ -19,6 +21,22 @@ public class Player : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         deathAnimation = GetComponent<DeathAnimation>();
         activeRenderer = smallRenderer;
+        if (LevelMenu.PlayAsPeach && peachIdle)
+        {
+            ApplyPeach(smallRenderer, 1f);
+            ApplyPeach(bigRenderer, 2f);
+            deathAnimation.deadSprite = peachDamage;
+        }
+    }
+
+    private void ApplyPeach(PlayerSpriteRenderer appearance, float height)
+    {
+        appearance.idle = peachIdle;
+        appearance.jump = peachJump;
+        appearance.slide = peachIdle;
+        appearance.run.sprites = peachRun;
+        appearance.GetComponent<SpriteRenderer>().sprite = peachIdle;
+        appearance.transform.localScale *= height / peachIdle.bounds.size.y;
     }
 
     public void Hit()

@@ -5052,7 +5052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909807642827942457, guid: 5a4628994e817814ba2dd4249ec821e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 75
+      value: 76
       objectReference: {fileID: 0}
     - target: {fileID: 6909807642827942457, guid: 5a4628994e817814ba2dd4249ec821e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5119,7 +5119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e979c93a9295034a8281e4f162e1799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AdventurePlatform
-  travel: 2.5
+  travel: 2.2
 --- !u!1001 &218169495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29091,7 +29091,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6909807642827942457, guid: 5a4628994e817814ba2dd4249ec821e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 117
+      value: 117.5
       objectReference: {fileID: 0}
     - target: {fileID: 6909807642827942457, guid: 5a4628994e817814ba2dd4249ec821e0, type: 3}
       propertyPath: m_LocalPosition.y
