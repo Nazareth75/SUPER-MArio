@@ -8,15 +8,20 @@ public class LevelTimer : MonoBehaviour
 
     float tiempoRestante;
     bool activo = true;
+    Player player;
 
     void Start()
     {
         tiempoRestante = tiempoInicial;
+        player = FindFirstObjectByType<Player>();
     }
 
     void Update()
     {
         if (!activo) return;
+
+        // Si Mario ya murió (Goomba, vacío, etc.) el tiempo se congela
+        if (player != null && player.dead) return;
 
         tiempoRestante -= Time.deltaTime;
 
@@ -32,8 +37,10 @@ public class LevelTimer : MonoBehaviour
 
     void TiempoAgotado()
     {
-        // Aquí matas a Mario, por ejemplo:
-        // FindObjectOfType<Player>().Morir();
+        if (player != null)
+        {
+            player.Death();
+        }
     }
 
     public void Detener() => activo = false; // llámalo al llegar a la bandera
