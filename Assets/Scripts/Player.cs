@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
         if (!dead && !starpower)
         {
             if (big) {
+                if (AudioManager.Instance) AudioManager.Instance.PlayDamage();
                 Shrink();
             } else {
                 Death();
@@ -36,7 +37,7 @@ public class Player : MonoBehaviour
     public void Death()
     {
         if (dead) return;
-        if (AdventureAudio.Instance) { AdventureAudio.Instance.StopMusic(); AdventureAudio.Instance.Play(AdventureAudio.Instance.hurt); }
+        if (AudioManager.Instance) AudioManager.Instance.PlayDeath();
         smallRenderer.enabled = false;
         bigRenderer.enabled = false;
         deathAnimation.enabled = true;
