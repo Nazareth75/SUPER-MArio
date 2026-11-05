@@ -89,6 +89,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smallRenderer: {fileID: 7989592652664066959}
   bigRenderer: {fileID: 8301214115263448928}
+  peachIdle: {fileID: 21300000, guid: cffe6112732b3b54e81c6da7b72ff731, type: 3}
+  peachJump: {fileID: 21300000, guid: 9fab6f595aeda324f8372d07e282b942, type: 3}
+  peachDamage: {fileID: 21300000, guid: 5e45515b84f8d694e986f569abe58fae, type: 3}
+  peachRun:
+  - {fileID: 21300000, guid: 739dac9643dfdef4f92e7c14d875447c, type: 3}
+  - {fileID: 21300000, guid: 43a1c7416ca85e344b59fcc7663ccd45, type: 3}
 --- !u!114 &481021467160599388
 MonoBehaviour:
   m_ObjectHideFlags: 0
