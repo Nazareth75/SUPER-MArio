@@ -46,7 +46,10 @@ public class CastleBoss : MonoBehaviour
             health--;
             invulnerableUntil = Time.time + 1.2f;
             if (AdventureAudio.Instance) AdventureAudio.Instance.Play(AdventureAudio.Instance.stomp);
-            if (health == 0) StartCoroutine(Defeat());
+            if (health == 0) {
+                ScoreManager.AddBossPoints(this);
+                StartCoroutine(Defeat());
+            }
         }
         else if (Time.time >= invulnerableUntil) player.Hit();
     }
