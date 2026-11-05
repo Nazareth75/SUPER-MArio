@@ -33,3 +33,19 @@ Los eventos GameplayEvents aun no existen en esta rama. Los scripts actuales ya 
 Se modifica Player.cs solo para separar danio y muerte; coordinar ese cambio con Jose.
 Los archivos .vscode/settings.json y SUPER-MArio.slnx son cambios locales previos y no forman parte de esta entrega.
 La validacion automatica verifica importacion, compilacion y referencias; la escucha y la prueba jugable requieren Unity con sonido.
+## Panel de volumen independiente del menu
+AudioVolumeMenu se agrega en ejecucion a Menu/MainMenu o una escena con LevelMenu. Aparece el boton Volumen abajo a la derecha; abre dos sliders y Guardar y cerrar. No se modificaron Menu.unity ni LevelMenu.cs.
+Los valores globales se aplican a AudioManager, se conservan entre niveles y se guardan al cerrar el panel o salir.
+Para un menu con otro nombre, agregar AudioVolumeMenu a un objeto manualmente.
+
+Integracion con botones propios de Nazaret:
+- Agregar AudioVolumeMenu a un objeto activo y desmarcar Draw Built In Controls.
+- Boton de abrir: OnClick -> AudioVolumeMenu.Open o Toggle.
+- Boton de cerrar: OnClick -> AudioVolumeMenu.Close.
+- Slider musica: rango 0..1; OnValueChanged(float) dinamico -> SetMusicVolume.
+- Slider efectos: rango 0..1; OnValueChanged(float) dinamico -> SetEffectsVolume.
+- Al abrir su panel, inicializar sliders con SetValueWithoutNotify(AudioVolumeSettings.Music/Effects).
+- IsOpen permite consultar el estado; el panel personalizado debe activar/desactivar su propia vista.
+- Si Nazaret usa AudioSources propios para musica de menu, aplicar AudioVolumeSettings.Music y escuchar Changed; AudioManager ya lo hace para la partida.
+
+Prueba: abrir Menu, pulsar Volumen, bajar musica a 0 y efectos a 50%, cerrar y entrar al nivel. No debe sonar musica pero si el salto. Volver al menu, invertir valores y comprobar el resultado inverso. Reiniciar el juego y verificar que se conservan. Restaurar los valores deseados. Los controles se guardan incluso si se ajustan en Play.

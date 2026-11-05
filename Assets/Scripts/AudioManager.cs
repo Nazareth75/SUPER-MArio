@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
         Instance = this;
+        AudioVolumeSettings.Changed += ApplyVolumes;
         background = gameObject.AddComponent<AudioSource>();
         effects = gameObject.AddComponent<AudioSource>();
         background.playOnAwake = effects.playOnAwake = false;
@@ -38,11 +39,16 @@ public class AudioManager : MonoBehaviour
 
     protected virtual void Start()
     {
-        SetVolumes(musicVolume, effectsVolume);
+        ApplyVolumes(AudioVolumeSettings.Music, AudioVolumeSettings.Effects);
         PlayMusic(music, loopMusic);
     }
 
     public void SetVolumes(float musicLevel, float effectsLevel)
+    {
+        AudioVolumeSettings.Set(musicLevel, effectsLevel);
+    }
+
+    private void ApplyVolumes(float musicLevel, float effectsLevel)
     {
         musicVolume = Mathf.Clamp01(musicLevel);
         effectsVolume = Mathf.Clamp01(effectsLevel);
@@ -52,7 +58,7 @@ public class AudioManager : MonoBehaviour
 
     protected virtual void OnValidate()
     {
-        SetVolumes(musicVolume, effectsVolume);
+        ApplyVolumes(musicVolume, effectsVolume);
     }
 
     public void PlayMusic(AudioClip clip, bool loop = true)
@@ -87,6 +93,7 @@ public class AudioManager : MonoBehaviour
 
     protected virtual void OnDestroy()
     {
+        AudioVolumeSettings.Changed -= ApplyVolumes;
         if (Instance != this) return;
         if (background) Destroy(background);
         if (effects) Destroy(effects);
