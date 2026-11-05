@@ -27,10 +27,6 @@ public class AdventureHud : MonoBehaviour
         }
         else
         {
-            GUI.Box(new Rect(16, 12, 928, 45), "");
-            var manager = GameManager.Instance;
-            GUI.Label(new Rect(25, 17, 800, 35), title + (manager ? $"     VIDAS  {manager.lives}     MONEDAS  {manager.coins:00}" : ""), text);
-            if (GUI.Button(new Rect(840, 20, 90, 28), "Menú") && manager) manager.ShowMenu();
             text.fontSize = 15;
             GUI.Label(new Rect(70, 506, 820, 26), SceneManager.GetActiveScene().name == "1-3" ? "A / D o flechas: nadar   ·   Espacio: impulso   ·   Llega a la tubería de salida" : "A / D o flechas: moverse   ·   Espacio: saltar   ·   Llega a la tubería de salida", text);
         }
