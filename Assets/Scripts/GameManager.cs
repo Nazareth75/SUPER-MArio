@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
         lives = 3;
         coins = 0;
+        ScoreManager.ResetScore();
         world = 1;
         string scene = SceneManager.GetActiveScene().name;
         stage = scene.StartsWith("1-") && int.TryParse(scene.Substring(2), out int number) ? number : 0;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         lives = 3;
         coins = 0;
+        ScoreManager.ResetScore();
         LoadLevel(1, Mathf.Clamp(number, 1, 4));
     }
 
@@ -98,6 +100,7 @@ public class GameManager : MonoBehaviour
     public void AddCoin()
     {
         coins++;
+        ScoreManager.AddCoinPoints();
 
         if (coins == 100)
         {
